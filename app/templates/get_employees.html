@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}All Employees{% endblock %}</title>
+  </head>
+  {% block content %}
+  <body>
+    {% if emps %}
+
+    <table class="table">
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile No</th>
+        <th>Designation</th>
+        <th>Salary</th>
+        <!-- <th></th> -->
+        <th>Action</th>
+      </tr>
+      {% for emp in emps %}
+      <tr>
+        <td>{{emp.id}}</td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.mobile_num}}</td>
+        <td>{{emp.designation}}</td>
+        <td>{{emp.salary}}</td>
+        <td>
+          <a href="{% url 'get_emp' emp.id %}"><button type="button" class="btn btn-outline-success">View / Edit</button></a>
+          <a href="{% url 'delete_emp' emp.id %}"><button type="button" class="btn btn-outline-danger">Delete</button></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% else %} No Records Found {% endif %}
+  </body>
+</html>
+
+{% endblock %}
